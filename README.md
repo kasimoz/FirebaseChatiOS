@@ -63,7 +63,7 @@ If you want to use this project, download your GoogleService-Info.plist file and
 
 ### App
 
-![](https://github.com/kasimoz/app_name/blob/master/app.gif)
+![](https://github.com/kasimoz/FirebaseChatiOS/blob/master/app.gif)
 
 
 
