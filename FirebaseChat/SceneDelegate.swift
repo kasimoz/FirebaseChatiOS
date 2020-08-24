@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -18,7 +19,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        if let user = Auth.auth().currentUser{
+            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let vc = storyboard.instantiateViewController(withIdentifier: "logged")
+            window?.rootViewController = vc
+            window?.makeKeyAndVisible()
+        }
+        
+        if let shortcutItem = connectionOptions.shortcutItem {
+            if shortcutItem.type == "com.kasim.firebasechat2.newChat"{
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: Notification.Name("shortcut"), object: nil, userInfo: nil)
+                }
+            }
+        }
     }
+    
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        if shortcutItem.type == "com.kasim.firebasechat2.newChat"{
+        }
+    }
+    
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -28,13 +50,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        if let user = Auth.auth().currentUser{
+            Database.database().reference().child("users").child(user.uid).child("online").setValue(true)
+            Database.database().reference().child("users").child(user.uid).child("lastOnlineTime").setValue(ServerValue.timestamp())
+        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
+        if let user = Auth.auth().currentUser{
+            Database.database().reference().child("users").child(user.uid).child("online").setValue(false)
+            Database.database().reference().child("users").child(user.uid).child("lastOnlineTime").setValue(ServerValue.timestamp())
+        }
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
@@ -43,9 +69,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
+        if let user = Auth.auth().currentUser{
+            Database.database().reference().child("users").child(user.uid).child("online").setValue(false)
+            Database.database().reference().child("users").child(user.uid).child("lastOnlineTime").setValue(ServerValue.timestamp())
+        }
     }
 
 

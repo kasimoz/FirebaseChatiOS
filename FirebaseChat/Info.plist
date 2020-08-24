@@ -16,10 +16,39 @@
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.579392870606-v64t72brh6b473tvkdcfsc9omeav04sn</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Gallery access is necessary to use this app</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access is necessary to use this app</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Contacts access is necessary to use this app</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Location access is necessary to use this app</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location access is necessary to use this app</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location access is necessary to use this app</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Microphone access is necessary to use this app</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Gallery access is necessary to use this app</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Gallery access is necessary to use this app</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -39,6 +68,10 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -59,6 +92,19 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeCompose</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>New Chat</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.kasim.firebasechat2.newChat</string>
+		</dict>
 	</array>
 </dict>
 </plist>
